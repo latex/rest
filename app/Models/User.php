@@ -1,4 +1,4 @@
-<?php namespace App\Model;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ class User extends Model {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'user';
 
 	/**
 	 * The attributes that are mass assignable.

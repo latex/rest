@@ -1,6 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use \App\Models\User;
+
+use Request;
+use Hash;
 
 class UserController extends Controller {
 
@@ -9,12 +13,24 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function __construct() {
 
+	private $user;
+
+	public function __construct(User $user) {
+		$this->user = $user;
 	}
 
 	public function index() {
-		return "get";
+		//$user = \App\Models\User::get();
+
+		/*
+		return response()->json([
+		'msg' => "Succes",
+		'Users' => $user->toArray(),
+		], 200
+		);
+		 */
+		return $this->user->all();
 	}
 
 	/**
@@ -23,7 +39,7 @@ class UserController extends Controller {
 	 * @return Response
 	 */
 	public function create() {
-		return "post";
+
 	}
 
 	/**
@@ -32,7 +48,11 @@ class UserController extends Controller {
 	 * @return Response
 	 */
 	public function store() {
-		return "post";
+
+		$user = User::create(Request::all(),[
+            'password' => Hash::make(Request::get('password'))
+        ]);
+		return $user;
 	}
 
 	/**
